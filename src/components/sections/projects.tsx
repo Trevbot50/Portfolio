@@ -1,5 +1,6 @@
 import { ProjectCard } from "./project-card";
-import { ScrollChevron } from "@/app/components/shared/scroll-chevron";
+import { ScrollChevron } from "@/components/scroll-chevron";
+import { SectionContent } from "@/components/layout";
 
 const projects = [
   {
@@ -59,24 +60,28 @@ const projects = [
 ];
 
 export function Projects() {
+  const featuredProjects = projects.slice(0, 3);
+
   return (
-    <section id="projects" className="relative container max-w-screen-xl mx-auto px-4 h-screen flex flex-col bg-background">
+    <section className="relative w-full h-screen flex flex-col">
       <ScrollChevron targetId="about" sectionId="projects" direction="up" />
-      <div className="pt-32 pb-4 text-center flex-shrink-0">
-        <h2 className="mb-4 text-3xl sm:text-4xl">Featured Projects</h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          A selection of my recent work showcasing different technologies and problem-solving approaches.
-        </p>
-      </div>
-      <div className="flex-1 overflow-y-auto pb-20 scrollbar-thin scrollbar-thumb-muted-foreground/20 scrollbar-track-transparent hover:scrollbar-thumb-muted-foreground/40">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 px-1">
-          {projects.map((project) => (
-            <div key={project.id}>
-              <ProjectCard {...project} />
-            </div>
-          ))}
+      <SectionContent className="flex-1 flex flex-col">
+        <div className="pt-32 pb-4 text-center flex-shrink-0">
+          <h2 className="mb-4 text-3xl sm:text-4xl">Featured Projects</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            A selection of my recent work showcasing different technologies and problem-solving approaches.
+          </p>
         </div>
-      </div>
+        <div className="flex-1 flex items-center pb-20">
+          <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 px-1">
+            {featuredProjects.map((project) => (
+              <div key={project.id}>
+                <ProjectCard {...project} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionContent>
       <ScrollChevron targetId="contact" sectionId="projects" />
     </section>
   );

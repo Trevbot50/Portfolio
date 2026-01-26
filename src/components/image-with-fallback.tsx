@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/app/components/ui/utils";
+import { cn } from "@/components/ui/utils";
 
 type ImageWithFallbackProps = Omit<React.ImgHTMLAttributes<HTMLImageElement>, "src"> & {
   src: string;

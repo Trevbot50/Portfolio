@@ -1,5 +1,6 @@
 
 import { createRoot } from "react-dom/client";
+import HomePage from "./pages/home";
 import "./styles/index.css";
 
 function renderFatalError(message: string, err?: unknown) {
@@ -15,7 +16,6 @@ function renderFatalError(message: string, err?: unknown) {
       </div>
     `;
   }
-  // Still log for the console
   // eslint-disable-next-line no-console
   console.error(message, err);
 }
@@ -39,54 +39,15 @@ function escapeHtml(input: string) {
   });
 }
 
-// eslint-disable-next-line no-console
-console.log("[bootstrap] main.tsx loaded");
-
 window.addEventListener("error", (e) => {
-  renderFatalError("Uncaught error", e.error ?? e.message);
+  renderFatalError("Uncaught error", (e as ErrorEvent).error ?? (e as ErrorEvent).message);
 });
 window.addEventListener("unhandledrejection", (e) => {
   renderFatalError("Unhandled promise rejection", (e as PromiseRejectionEvent).reason);
 });
 
-async function bootstrap() {
-  const el = document.getElementById("root");
-  if (!el) throw new Error("Missing #root element");
-
-  // Force an explicit URL import (bypasses resolver quirks + stale module graph entries).
-  const appUrl = `/src/app/root.tsx?t=${Date.now()}`;
-
-  // Debug what Vite is actually serving for this module.
-  const res = await fetch(appUrl);
-  const served = await res.text();
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] fetch", appUrl, "status:", res.status, res.statusText);
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] served module preview:", served.slice(0, 300));
-
-  // Also inspect the ScrollChevron module that is currently failing at runtime.
-  const chevronUrl = `/src/app/components/shared/scroll-chevron.tsx?t=${Date.now()}`;
-  const chevronRes = await fetch(chevronUrl);
-  const chevronServed = await chevronRes.text();
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] fetch", chevronUrl, "status:", chevronRes.status, chevronRes.statusText);
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] served scroll-chevron preview:", chevronServed.slice(0, 300));
-  const AppModule = await import(/* @vite-ignore */ appUrl);
-
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] loaded", appUrl, "keys:", Object.keys(AppModule));
-  // eslint-disable-next-line no-console
-  console.log("[bootstrap] app export test:", (AppModule as any).__APP_EXPORT_TEST__);
-
-  const RootApp = (AppModule as any).default ?? (AppModule as any).App;
-  if (!RootApp) {
-    throw new Error(
-      `App module has no exports we can render. Available exports: ${Object.keys(AppModule).join(", ") || "(none)"}`
-    );
-  }
-
-  createRoot(el).render(<RootApp />);
-}
-
-bootstrap().catch((err) => renderFatalError("Bootstrap exception", err));
+const el = document.getElementById("root");
+if (!el) throw new Error("Missing #root element");
+createRoot(el).render(
+  <HomePage />,
+);

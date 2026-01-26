@@ -20,22 +20,26 @@ export function ScrollChevron({ targetId, sectionId, isDark = false, direction =
       const sectionHeight = sectionRect.height;
       const sectionTop = sectionRect.top;
       const windowHeight = window.innerHeight;
+      const isInView = sectionTop < windowHeight && sectionTop + sectionHeight > 0;
+      const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 
       if (direction === "down") {
-        // For downward chevrons: fade when scrolling away from the section
-        const scrollProgress = Math.abs(sectionTop) / (sectionHeight - windowHeight);
-
-        // Start fading when we've scrolled 30% through the section
-        if (scrollProgress > 0.3) {
-          const fadeAmount = Math.max(0, 1 - (scrollProgress - 0.3) * 2);
-          setOpacity(fadeAmount);
-        } else {
-          setOpacity(1);
+        // Down chevrons should only be visible while their section is active/in view.
+        if (!isInView) {
+          setOpacity(0);
+          return;
         }
+
+        // For full-screen snap sections, compute progress via sectionTop rather than (height - viewport)
+        // to avoid divide-by-zero when sectionHeight === windowHeight.
+        const scrollProgress = clamp01((-sectionTop) / windowHeight);
+
+        // Start fading when we've scrolled ~30% through the section
+        const fadeAmount =
+          scrollProgress > 0.3 ? Math.max(0, 1 - (scrollProgress - 0.3) * 2) : 1;
+        setOpacity(fadeAmount);
       } else {
         // For upward chevrons: show when scrolled into the section
-        const isInView = sectionTop < windowHeight && sectionTop + sectionHeight > 0;
-
         if (isInView) {
           // Calculate how far into the section we are
           const distanceFromTop = windowHeight - sectionTop;
@@ -53,10 +57,17 @@ export function ScrollChevron({ targetId, sectionId, isDark = false, direction =
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Our app uses a dedicated scroll container (FullscreenLayout) and disables window scrolling.
+    // Bind to the scroll container so chevrons update correctly.
+    const scrollContainer =
+      (document.getElementById("app-scroll-container") as HTMLElement | null) ??
+      window;
+
+    // HTMLElement#addEventListener exists; window also supports it.
+    scrollContainer.addEventListener("scroll", handleScroll as EventListener);
     handleScroll(); // Initial check
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => scrollContainer.removeEventListener("scroll", handleScroll as EventListener);
   }, [sectionId, direction]);
 
   const handleClick = () => {

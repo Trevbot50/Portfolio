@@ -1,7 +1,8 @@
-import { Button } from "@/app/components/ui/button";
-import { Badge } from "@/app/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { ScrollChevron } from "@/app/components/shared/scroll-chevron";
+import { ScrollChevron } from "@/components/scroll-chevron";
+import { SectionContent } from "@/components/layout";
 import { useState, useEffect } from "react";
 
 export function Hero() {
@@ -57,34 +58,36 @@ export function Hero() {
   };
 
   return (
-    <section className="relative container max-w-screen-xl mx-auto px-4 py-16 h-screen flex items-center bg-background">
-      <div className="flex flex-col items-center text-center w-full">
-        <Badge className="mb-4">Available for opportunities</Badge>
-        <h1 className="mb-4 max-w-3xl text-4xl tracking-tight sm:text-5xl md:text-6xl">
-          Software{" "}
-          <span className={isHighlighted ? "bg-[#53D52F]/75 dark:bg-[#53D52F]/75 text-foreground px-1" : ""}>
-            {renderText()}
-          </span>
-          <span className="animate-pulse">|</span>
-        </h1>
-        <p className="mb-8 max-w-2xl text-muted-foreground text-lg">
-          Building modern web applications with a focus on clean code, user experience, and scalable solutions.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Button size="lg">
-            <Mail className="mr-2 h-4 w-4" />
-            Contact Me
-          </Button>
-          <Button size="lg" variant="outline">
-            <Github className="mr-2 h-4 w-4" />
-            GitHub
-          </Button>
-          <Button size="lg" variant="outline">
-            <Linkedin className="mr-2 h-4 w-4" />
-            LinkedIn
-          </Button>
+    <section className="relative w-full h-screen flex items-center">
+      <SectionContent className="py-16">
+        <div className="flex flex-col items-center text-center w-full">
+          <Badge className="mb-4">Available for opportunities</Badge>
+          <h1 className="mb-4 max-w-3xl text-4xl tracking-tight sm:text-5xl md:text-6xl">
+            Software{" "}
+            <span className={isHighlighted ? "bg-[#53D52F]/75 dark:bg-[#53D52F]/75 text-foreground px-1" : ""}>
+              {renderText()}
+            </span>
+            <span className="animate-pulse">|</span>
+          </h1>
+          <p className="mb-8 max-w-2xl text-muted-foreground text-lg">
+            Building modern web applications with a focus on clean code, user experience, and scalable solutions.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button size="lg">
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Me
+            </Button>
+            <Button size="lg" variant="outline">
+              <Github className="mr-2 h-4 w-4" />
+              GitHub
+            </Button>
+            <Button size="lg" variant="outline">
+              <Linkedin className="mr-2 h-4 w-4" />
+              LinkedIn
+            </Button>
+          </div>
         </div>
-      </div>
+      </SectionContent>
       <ScrollChevron targetId="about" sectionId="hero" />
     </section>
   );

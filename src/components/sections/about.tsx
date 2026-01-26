@@ -1,10 +1,11 @@
-import { Card, CardContent } from "@/app/components/ui/card";
-import { Code2, Palette, Zap, ChevronDown } from "lucide-react";
-import { ScrollChevron } from "@/app/components/shared/scroll-chevron";
+import { Card, CardContent } from "@/components/ui/card";
+import { Code2, Palette, Zap } from "lucide-react";
+import { ScrollChevron } from "@/components/scroll-chevron";
+import { SectionContent } from "@/components/layout";
 import { MousePointerClick } from 'lucide-react';
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { ImageWithFallback } from "@/app/components/shared/image-with-fallback";
+import { Button } from "@/components/ui/button";
 
 const skills = [
   {
@@ -28,7 +29,6 @@ export function About() {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const [isExiting, setIsExiting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     if (isPaused) return;
@@ -70,12 +70,12 @@ export function About() {
   }, [isPaused]);
 
   return (
-    <section id="about" className="relative w-full bg-[#CDCDCD] h-screen flex items-center overflow-hidden">
+    <section className="relative w-full h-screen flex items-center overflow-hidden">
       <ScrollChevron targetId="hero" sectionId="about" direction="up" />
-      <div className="container max-w-screen-xl mx-auto px-4 py-16 w-full overflow-y-auto">
+      <SectionContent className="py-16 overflow-y-auto">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl sm:text-4xl">About Me</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg">
             Creating digital experiences that feel more than just a click. <MousePointerClick className="inline-block ml-1" size={20} />
           </p>
         </div>
@@ -119,85 +119,19 @@ export function About() {
             ))}
           </AnimatePresence>
         </div>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="w-full text-center">
           <p className="text-muted-foreground mb-4">
             I'm a software developer with a passion for building modern web applications. With experience in both front and backend development, I enjoy turning complex problems into simple, 
             beautiful, and intuitive solutions.
           </p>
-
-          {/* Dive Deeper Section */}
-          <div className="mt-8">
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="inline-flex items-center gap-2 text-2xl sm:text-3xl hover:opacity-70 transition-opacity"
-            >
-              Dive Deeper
-              <motion.div
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
-            </button>
-
-            <AnimatePresence>
-              {isExpanded && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden"
-                >
-                  <Card className="mt-6 text-left">
-                    <CardContent className="pt-6">
-                      <div className="grid gap-6 md:grid-cols-2">
-                        <div className="space-y-4">
-                          <h3 className="text-xl font-semibold">My Journey</h3>
-                          <p className="text-sm text-muted-foreground">
-                            My path into software development started with python and creating tools to help gain insights from large sets of complex data.
-                            Working at my first start up, I discovered my passion for efficiency and asthetics both visually and tecnically. 
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            Beyond the screen, I find inspiration in nature and community. Whether it's scaling thousands of feet of rock,
-                            strategizing over a chess board, or just hanging with friends, all my experiences ultimatley shape my approach to problem-solving and design.
-                          </p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <ImageWithFallback
-                              src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400"
-                              alt="Rock climbing"
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
-                            <p className="text-xs text-muted-foreground">Climbing adventures</p>
-                          </div>
-                          <div className="space-y-2">
-                            <ImageWithFallback
-                              src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400"
-                              alt="Backpacking"
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
-                            <p className="text-xs text-muted-foreground">Wilderness backpacking</p>
-                          </div>
-                          <div className="space-y-2 col-span-2">
-                            <ImageWithFallback
-                              src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=400"
-                              alt="Chess"
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
-                            <p className="text-xs text-muted-foreground">Strategic thinking through chess</p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </div>
-      </div>
+
+        <div className="mt-10 flex justify-center">
+          <Button size="lg" asChild>
+            <a href={`${import.meta.env.BASE_URL}shake-my-hand/`}>Shake My Hand</a>
+          </Button>
+        </div>
+      </SectionContent>
       <ScrollChevron targetId="projects" sectionId="about" />
     </section>
   );
