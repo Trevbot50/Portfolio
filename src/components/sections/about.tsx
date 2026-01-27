@@ -6,6 +6,7 @@ import { MousePointerClick } from 'lucide-react';
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/section-header";
 
 const skills = [
   {
@@ -73,12 +74,16 @@ export function About() {
     <section className="relative w-full h-screen flex items-center overflow-hidden">
       <ScrollChevron targetId="hero" sectionId="about" direction="up" />
       <SectionContent className="py-16 overflow-y-auto">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl sm:text-4xl">About Me</h2>
-          <p className="text-muted-foreground text-lg">
-            Creating digital experiences that feel more than just a click. <MousePointerClick className="inline-block ml-1" size={20} />
-          </p>
-        </div>
+        <SectionHeader
+          className="mb-12"
+          title="About Me"
+          subtitle={
+            <>
+              Creating digital experiences that feel more than just a click.{" "}
+              <MousePointerClick className="inline-block ml-1" size={20} />
+            </>
+          }
+        />
         <div className="flex justify-center mb-4">
           <button 
             onClick={() => setIsPaused(!isPaused)}

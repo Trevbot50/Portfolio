@@ -19,6 +19,7 @@ export default defineConfig({
       input: {
         main: resolve(rootDir, "index.html"),
         shakeMyHand: resolve(rootDir, "shake-my-hand/index.html"),
+        experienceProjects: resolve(rootDir, "experience-projects/index.html"),
       },
     },
   },

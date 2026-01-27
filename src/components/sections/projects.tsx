@@ -1,78 +1,55 @@
 import { ProjectCard } from "./project-card";
 import { ScrollChevron } from "@/components/scroll-chevron";
 import { SectionContent } from "@/components/layout";
+import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/section-header";
 
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with real-time inventory management and payment processing.",
+    title: "AdRun",
+    description: "An Ad-tech start up that seeks to revolutionize UGC advertising and marketing.",
     image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    demoUrl: "#",
+    tags: ["TypeScript","React", "API Integration", "SQL", "Supabase"],
+    siteUrl: "#",
     githubUrl: "#",
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "Collaborative task management tool with drag-and-drop interface and team features.",
+    title: "MineChess",
+    description: "Personal project to build a website to host a chess variant of our own creation.",
     image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=600&fit=crop",
-    tags: ["TypeScript", "React", "Firebase", "Tailwind"],
-    demoUrl: "#",
+    tags: ["React", "Vercel", "Tailwind CSS"],
+    siteUrl: "#",
     githubUrl: "#",
   },
   {
     id: 3,
-    title: "Weather Dashboard",
-    description: "Real-time weather monitoring dashboard with interactive maps and forecasting.",
+    title: "FinFriends",
+    description: "A program to help friend groups pro-rate their trip finances all in one place.",
     image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=800&h=600&fit=crop",
-    tags: ["React", "API Integration", "Charts", "CSS"],
-    demoUrl: "#",
+    tags: ["Python", "Pandas", "Seaborn", "Matplotlib"],
+    siteUrl: "#",
     githubUrl: "#",
   },
-  {
-    id: 4,
-    title: "Social Media Analytics",
-    description: "Analytics platform for tracking social media engagement and generating insights.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    tags: ["Vue.js", "Express", "MongoDB", "D3.js"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 5,
-    title: "Portfolio CMS",
-    description: "Content management system for creative professionals to showcase their work.",
-    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&h=600&fit=crop",
-    tags: ["Next.js", "Sanity", "React", "Vercel"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 6,
-    title: "AI Chat Assistant",
-    description: "Intelligent chatbot powered by machine learning for customer support automation.",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=600&fit=crop",
-    tags: ["Python", "TensorFlow", "React", "WebSocket"],
-    demoUrl: "#",
-    githubUrl: "#",
-  },
+
 ];
 
 export function Projects() {
   const featuredProjects = projects.slice(0, 3);
+  const experienceHref = `${import.meta.env.BASE_URL}experience-projects/`;
 
   return (
     <section className="relative w-full h-screen flex flex-col">
       <ScrollChevron targetId="about" sectionId="projects" direction="up" />
       <SectionContent className="flex-1 flex flex-col">
-        <div className="pt-32 pb-4 text-center flex-shrink-0">
-          <h2 className="mb-4 text-3xl sm:text-4xl">Featured Projects</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A selection of my recent work showcasing different technologies and problem-solving approaches.
-          </p>
-        </div>
-        <div className="flex-1 flex items-center pb-20">
+        <SectionHeader
+          className="pt-32 pb-4 flex-shrink-0"
+          title="Featured Projects"
+          subtitle="My favorite projects I've worked on."
+          subtitleClassName="max-w-2xl mx-auto"
+        />
+        <div className="flex-1 flex items-center pb-40">
           <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 px-1">
             {featuredProjects.map((project) => (
               <div key={project.id}>
@@ -82,6 +59,13 @@ export function Projects() {
           </div>
         </div>
       </SectionContent>
+
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20">
+        <Button size="lg" asChild>
+          <a href={experienceHref}>Dive Deeper</a>
+        </Button>
+      </div>
+
       <ScrollChevron targetId="contact" sectionId="projects" />
     </section>
   );

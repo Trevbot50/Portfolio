@@ -78,13 +78,17 @@ export function ScrollChevron({ targetId, sectionId, isDark = false, direction =
   };
 
   const Icon = direction === "down" ? ChevronDown : ChevronUp;
-  const position = direction === "down" ? "bottom-8" : "top-24";
+  const positionClassName = direction === "down" ? "bottom-8" : "";
+  const style: React.CSSProperties =
+    direction === "up"
+      ? { opacity, top: "calc(var(--header-height) + 0.75rem)" }
+      : { opacity };
 
   return (
     <button
       onClick={handleClick}
-      className={`absolute ${position} left-1/2 -translate-x-1/2 transition-opacity duration-300 hover:scale-110 z-10`}
-      style={{ opacity }}
+      className={`absolute ${positionClassName} left-1/2 -translate-x-1/2 transition-opacity duration-300 hover:scale-110 z-10`}
+      style={style}
       aria-label={`Scroll to ${direction === "down" ? "next" : "previous"} section`}
     >
       <Icon

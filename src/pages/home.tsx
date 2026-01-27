@@ -1,19 +1,12 @@
-import { FullscreenLayout, FullscreenSection } from "../components/layout";
-import { Header } from "../components/header";
+import { AppShell, FullscreenSection } from "../components/layout";
 import { Hero } from "../components/sections/hero";
 import { Projects } from "../components/sections/projects";
 import { About } from "../components/sections/about";
 import { Contact } from "../components/sections/contact";
-import { ThemeToggle } from "../components/theme-toggle";
 
 export function HomePage() {
   return (
-    <>
-      <ThemeToggle />
-
-      <FullscreenLayout>
-        <Header /> {/* Header inside the scrollable container */}
-
+    <AppShell>
         <FullscreenSection id="hero" className="bg-background">
           <Hero />
         </FullscreenSection>
@@ -29,8 +22,7 @@ export function HomePage() {
         <FullscreenSection id="contact" className="bg-muted">
           <Contact />
         </FullscreenSection>
-      </FullscreenLayout>
-    </>
+    </AppShell>
   );
 }
 

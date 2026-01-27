@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Github, Linkedin, MapPin } from "lucide-react";
 import { ScrollChevron } from "@/components/scroll-chevron";
 import { Footer } from "@/components/footer";
 import { SectionContent } from "@/components/layout";
+import { SectionHeader } from "@/components/section-header";
 
 export function Contact() {
   return (
@@ -13,12 +14,11 @@ export function Contact() {
       <ScrollChevron targetId="projects" sectionId="contact" direction="up" />
       <div className="flex-1 flex items-center py-16">
         <SectionContent>
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl sm:text-4xl">Get In Touch</h2>
-            <p className="text-muted-foreground text-lg">
-              Have a project in mind? Let's discuss how we can work together.
-            </p>
-          </div>
+          <SectionHeader
+            className="mb-12"
+            title="Get In Touch"
+            subtitle="Have a project in mind? Let's discuss how we can work together."
+          />
           <div className="grid w-full gap-8 lg:grid-cols-2">
             <Card>
               <CardHeader>
@@ -37,39 +37,50 @@ export function Contact() {
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="message">Message</label>
-                    <Textarea id="message" placeholder="Tell me about your project..." rows={5} />
+                    <Textarea id="message" placeholder="Your inquiry..." rows={5} />
                   </div>
                   <Button type="submit" className="w-full">Send Message</Button>
                 </form>
               </CardContent>
             </Card>
             <div className="space-y-6">
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <Mail className="h-5 w-5" />
+              <a
+                href="https://www.linkedin.com/in/trevor-woon-1a5abb17a"
+                target="_blank"
+                rel="noreferrer"
+                className="block"
+              >
+                <Card className="transition-colors hover:bg-muted/30 dark:hover:border-white">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                        <Linkedin className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="mb-1">LinkedIn</h3>
+                        <p className="text-sm text-muted-foreground">linkedin.com/in/trevor-woon-1a5abb17a</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="mb-1">Email</h3>
-                      <p className="text-sm text-muted-foreground">trevorwoon8@gmail.com</p>
+                  </CardContent>
+                </Card>
+              </a>
+
+              <a href="https://github.com/Trevbot50" target="_blank" rel="noreferrer" className="block">
+                <Card className="transition-colors hover:bg-muted/30 dark:hover:border-white">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                        <Github className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="mb-1">GitHub</h3>
+                        <p className="text-sm text-muted-foreground">github.com/Trevbot50</p>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <Phone className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="mb-1">Phone</h3>
-                      <p className="text-sm text-muted-foreground">+1 (650) 485-9745</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </a>
+
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
